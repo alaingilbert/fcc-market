@@ -1,0 +1,47 @@
+<html ng-app="app">
+  <head>
+    <title>Stock Market</title>
+    <link rel="stylesheet" type="text/css" href="/public/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css" />
+    <script src="/public/jquery-3.1.1.min.js"></script>
+    <script src="/public/bootstrap.min.js"></script>
+    <script src="/public/angular.min.js"></script>
+    <script src="/public/app.js"></script>
+    <script src="/public/highstock.src.js"></script>
+    <script src="/public/highcharts-ng.js"></script>
+    <script src="/public/lodash.min.js"></script>
+    <script src="/public/angular-websocket.min.js"></script>
+    <style>
+    .stock {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 10px;
+        display: inline-block;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container" ng-controller="AppController as ctrl">
+
+      <br />
+
+      <div class="form-inline">
+          <input type="text" class="form-control" ng-model="ctrl.code" />
+          <button class="btn btn-primary" ng-click="ctrl.btnSendClicked()">Send</button>
+      </div>
+
+      <div>
+        <highchart id="chart1" series="ctrl.chartConfig.series" title="ctrl.chartConfig.title" options="ctrl.chartConfig.options">
+      </div>
+
+      <div id="stockst" ng-cloak>
+        <div class="stock" ng-repeat="name in ctrl.stockNames track by $index">
+          <button class="btn btn-danger" ng-click="ctrl.btnRemoveStockClicked(name)"><i class="fa fa-trash"></i></button>
+          {{name}}
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
